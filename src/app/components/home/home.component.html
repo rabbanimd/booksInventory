@@ -1,26 +1,33 @@
+<!-- infinite-scroll 
+ [infiniteScrollDistance]="2"
+ [infiniteScrollThrottle]="1000"
+(scrolled)="onScroll()"  -->
 <div class="container">
     <div class="row">
-        <p class="text-center">Total results : {{booksPage?.pageSize}}</p>
+        <p class="text-center">Total results : {{nOfResult}}</p>
         <div class="hr">
             <hr >
         </div>
-        <div class="col-mx-12 p-2 m-2" *ngFor="let book of booksPage?.books;">
-            <div class="card">
-                <div class="card-header">
-                  <ul class="d-flex justify-content-between">
-                    <li class="text list-group-item">{{book.id}}</li>
-                    <li class="text list-group-item">{{book.isbn}}</li>
-                    <li class="text list-group-item">{{book.pages}}</li>
-                  </ul>
-                </div>
-                <div class="card-body">
-                  <blockquote class="blockquote mb-0">
-                    <h3>{{book.bookName}}</h3>
-                    <p class="text">{{book.description}}</p>
-                    <footer class="blockquote-footer">{{book.authorName}}</footer>
-                  </blockquote>
-                </div>
-              </div>
+        <div infinite-scroll (scrolled)="onScroll($event)" [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="1000">
+            <div class="col-mx-12 p-2 m-2" *ngFor="let book of booksList;">
+                <div class="card">
+                    <div class="card-header">
+                      <ul class="d-flex justify-content-between">
+                        <li class="text list-group-item">{{book.id}}</li>
+                        <li class="text list-group-item">{{book.isbn}}</li>
+                        <li class="text list-group-item">{{book.pages}}</li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                        <h3>{{book.bookName}}</h3>
+                        <p class="text">{{book.description}}</p>
+                        <footer class="blockquote-footer">{{book.authorName}}</footer>
+                      </blockquote>
+                    </div>
+                  </div>
+            </div>
         </div>
     </div>
 </div>
